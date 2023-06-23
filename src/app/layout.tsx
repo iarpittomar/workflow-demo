@@ -1,3 +1,4 @@
+import { Providers } from "@/providers/providers";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <div className="flex flex-col min-h-full">{children}</div>
+        <Providers>
+          <div className="flex flex-col min-h-full">{children}</div>
+        </Providers>
       </body>
     </html>
   );

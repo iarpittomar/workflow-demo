@@ -6,6 +6,50 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  daisyui: {
+    themes: [
+      {
+        customTheme: {
+          primary: "#004696",
+          "primary-focus": "#003f87",
+          "primary-content": "#ffffff",
+
+          // secondary: "#00BAA2",
+          // "secondary-focus": "#00BAA2",
+          // "secondary-content": "#ffffff",
+
+          accent: "#525C79",
+          "accent-focus": "#9EAEBD",
+          "accent-content": "#ffffff",
+
+          neutral: "#6F758A", //Post Job
+          "neutral-focus": "#2a2e37",
+          "neutral-content": "#ffffff",
+
+          "base-100": "#ffffff",
+          "base-200": "#F3F5FA",
+          "base-300": "#9EAEBD",
+          "base-content": "#303A58",
+
+          info: "#1c92f2",
+          success: "#009485",
+          warning: "#ff9900",
+          error: "#ff5724",
+
+          "--rounded-box": "1rem",
+          "--rounded-btn": ".5rem",
+          "--rounded-badge": "1.9rem",
+
+          "--animation-btn": ".25s",
+          "--animation-input": ".2s",
+
+          "--btn-text-case": "none",
+          "--navbar-padding": ".5rem",
+          "--border-btn": "1px",
+        },
+      },
+    ],
+  },
   theme: {
     fontSize: {
       h1: "48px",
@@ -84,5 +128,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
