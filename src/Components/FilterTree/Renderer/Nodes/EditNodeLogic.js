@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { arrayOf, func, oneOfType, number, shape, string } from 'prop-types';
-import { BasicSelect as DropDownList } from '../../../select';
-import Button from '@mui/material/Button';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { arrayOf, func, oneOfType, number, shape, string } from "prop-types";
+import { BasicSelect as DropDownList } from "../../../select";
+import Button from "@mui/material/Button";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 const EditNodeLogic = ({ node, path, nodeAction }) => {
   const source = [
-    { label: 'AND', logic: 'AND', value: 'AND' },
-    { label: 'OR', logic: 'OR', value: 'OR' },
+    { label: "AND", logic: "AND", value: "AND" },
+    { label: "OR", logic: "OR", value: "OR" },
   ];
   const [logic, setLogic] = useState(node.logic);
 
@@ -18,11 +20,11 @@ const EditNodeLogic = ({ node, path, nodeAction }) => {
   };
 
   const onSubmit = () => {
-    nodeAction('save', { ...node, logic }, path);
+    nodeAction("save", { ...node, logic }, path);
   };
 
   const onCancel = useCallback(
-    () => nodeAction('cancel', node, path),
+    () => nodeAction("cancel", node, path),
     [node, path, nodeAction]
   );
 
@@ -40,14 +42,18 @@ const EditNodeLogic = ({ node, path, nodeAction }) => {
       </div>
       <div className="rowToolbar">
         <div className="toolbarButton">
-          <Button id="checkmark" onClick={onSubmit}>
-            <CheckIcon style={{ color: 'grey' }} />
-          </Button>
+          <button className="btn btn-primary" id="checkmark" onClick={onSubmit}>
+            <CheckIcon style={{ color: "grey" }} />
+          </button>
         </div>
         <div className="toolbarButton">
-          <Button onClick={() => nodeAction('cancel', node, path)} id="cancel">
-            <CloseIcon style={{ color: 'grey' }} />
-          </Button>
+          <button
+            className="btn btn-prmary"
+            onClick={() => nodeAction("cancel", node, path)}
+            id="cancel"
+          >
+            <CloseIcon style={{ color: "grey" }} />
+          </button>
         </div>
       </div>
     </div>

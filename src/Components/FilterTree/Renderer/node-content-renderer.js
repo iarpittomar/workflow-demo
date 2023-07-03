@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React from "react";
 import {
   arrayOf,
   bool,
@@ -8,20 +10,20 @@ import {
   oneOfType,
   shape,
   string,
-} from 'prop-types';
+} from "prop-types";
 
-import './styles.scss';
+import "./styles.scss";
 import {
   EditNodeLogic,
   EditServiceCondition,
   EditNodeCondition,
   ShowNode,
-} from './Nodes';
+} from "./Nodes";
 
 function isDescendant(older, younger) {
   return (
     !!older.children &&
-    typeof older.children !== 'function' &&
+    typeof older.children !== "function" &&
     older.children.some(
       (child) => child === younger || isDescendant(child, younger)
     )
@@ -64,16 +66,16 @@ const CustomThemeNodeContentRenderer = ({
 
   const nodeContent = connectDragPreview(
     <div
-      className={`row${isLandingPadActive ? `rowLandingPad` : ''}${
-        isLandingPadActive && !canDrop ? `rowCancelPad` : ''
-      }${isSearchMatch ? `rowSearchMatch` : ''}${
-        isSearchFocus ? `rowSearchFocus` : ''
-      }${className ? ` ${className}` : ''}`}
+      className={`row${isLandingPadActive ? `rowLandingPad` : ""}${
+        isLandingPadActive && !canDrop ? `rowCancelPad` : ""
+      }${isSearchMatch ? `rowSearchMatch` : ""}${
+        isSearchFocus ? `rowSearchFocus` : ""
+      }${className ? ` ${className}` : ""}`}
       style={{ ...style, opacity: isDraggedDescendant ? 0.1 : 1 }}
     >
       {node.mode &&
-        (node.mode === 'edit' || node.mode === 'new') &&
-        node.type === 'condition' && (
+        (node.mode === "edit" || node.mode === "new") &&
+        node.type === "condition" && (
           <EditNodeCondition
             node={node}
             path={path}
@@ -82,8 +84,8 @@ const CustomThemeNodeContentRenderer = ({
           />
         )}
       {node.mode &&
-        (node.mode === 'edit' || node.mode === 'new') &&
-        node.type === 'service' && (
+        (node.mode === "edit" || node.mode === "new") &&
+        node.type === "service" && (
           <EditServiceCondition
             node={node}
             path={path}
@@ -92,8 +94,8 @@ const CustomThemeNodeContentRenderer = ({
           />
         )}
       {node.mode &&
-        (node.mode === 'edit' || node.mode === 'new') &&
-        node.type === 'logic' && (
+        (node.mode === "edit" || node.mode === "new") &&
+        node.type === "logic" && (
           <EditNodeLogic
             node={node}
             path={path}
@@ -101,7 +103,7 @@ const CustomThemeNodeContentRenderer = ({
             nodeAction={handleFilterItemAction}
           />
         )}
-      {(!node.mode || node.mode === 'show') && (
+      {(!node.mode || node.mode === "show") && (
         <ShowNode
           node={node}
           styles={{}}
@@ -115,24 +117,24 @@ const CustomThemeNodeContentRenderer = ({
   );
 
   const classNode =
-    (node.type ? `type-${node.type}` : '') +
-    (node.mode ? ` mode-${node.mode.toLowerCase()}` : '') +
-    (node.status ? ` status-${node.status}` : '') +
+    (node.type ? `type-${node.type}` : "") +
+    (node.mode ? ` mode-${node.mode.toLowerCase()}` : "") +
+    (node.status ? ` status-${node.status}` : "") +
     (path.length === 1 && (!node.children || node.children.length === 0)
-      ? ' has-no-children'
-      : '');
+      ? " has-no-children"
+      : "");
 
-  const classCanDrag = `rowWrapper${!canDrag ? `rowWrapperDragDisabled` : ''}`;
+  const classCanDrag = `rowWrapper${!canDrag ? `rowWrapperDragDisabled` : ""}`;
 
   return (
-    <div style={{ height: '100%' }} {...otherProps} className={classNode}>
+    <div style={{ height: "100%" }} {...otherProps} className={classNode}>
       {toggleChildrenVisibility &&
         node.children &&
-        (node.children.length > 0 || typeof node.children === 'function') && (
+        (node.children.length > 0 || typeof node.children === "function") && (
           <div>
             <button
               type="button"
-              aria-label={node.expanded ? 'Collapse' : 'Expand'}
+              aria-label={node.expanded ? "Collapse" : "Expand"}
               className={node.expanded ? `collapseButton` : `expandButton`}
               style={{ left: -0.5 * scaffoldBlockPxWidth }}
               onClick={() =>
@@ -149,7 +151,7 @@ const CustomThemeNodeContentRenderer = ({
         )}
       <div className={classCanDrag}>
         {canDrag
-          ? connectDragSource(nodeContent, { dropEffect: 'copy' })
+          ? connectDragSource(nodeContent, { dropEffect: "copy" })
           : nodeContent}
       </div>
     </div>
@@ -194,7 +196,7 @@ CustomThemeNodeContentRenderer.propTypes = {
 CustomThemeNodeContentRenderer.defaultProps = {
   canDrag: false,
   canDrop: false,
-  className: '',
+  className: "",
   draggedNode: null,
   isSearchFocus: false,
   isSearchMatch: false,
