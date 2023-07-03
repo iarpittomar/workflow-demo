@@ -25,7 +25,7 @@ const LoginForm = () => {
 
   const onSubmit = (data: LoginFormType) => {
     setIsButtonLoading(true);
-    if (data.email === "sayf@mgt.com" && data.password === "sayf@1234") {
+    if (data.email === "sayf@mgt.com" && data.password === "Sayfmgt@1234") {
       setIsButtonLoading(false);
       toast({
         title: "Login successful",

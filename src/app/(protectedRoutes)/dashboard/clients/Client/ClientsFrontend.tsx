@@ -13,8 +13,10 @@ import {
   Icon,
   Box,
   Flex,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { MdSettings, MdLock } from "react-icons/md";
+import FilterModal from "./FilterModal";
 
 const ClientsFrontend = () => {
   const tableData = [
@@ -110,53 +112,58 @@ const ClientsFrontend = () => {
     },
   ];
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <Card className="mt-12">
-      <TableContainer className="">
-        <Table variant="striped">
-          <Thead>
-            <Tr>
-              <Th>Clinet Id</Th>
-              <Th>Clinet Name</Th>
-              <Th>Service Used</Th>
-              <Th>Country</Th>
-              <Th>Script</Th>
-              <Th>Actions</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {tableData.map((item) => {
-              return (
-                <Tr key={item.id}>
-                  <Td>{item.id}</Td>
-                  <Td>{item.name}</Td>
-                  <Td>
-                    <AvatarGroup size="md" max={2}>
-                      {item.services.map((service, index) => (
-                        <Avatar
-                          bg="#004696"
-                          color="#fff"
-                          key={index}
-                          name={service}
-                        />
-                      ))}
-                    </AvatarGroup>
-                  </Td>
-                  <Td>{item.createdAt}</Td>
-                  <Td>{item.createdAt}</Td>
-                  <Td>
-                    <Flex cursor="pointer" color="blue.700" fontSize="2rem">
-                      <Icon as={MdSettings} />
-                      <Icon as={MdLock} />
-                    </Flex>
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </Card>
+    <>
+      <FilterModal isOpen={isOpen} onClose={onClose} />
+      <Card className="mt-12">
+        <TableContainer className="">
+          <Table variant="striped">
+            <Thead>
+              <Tr>
+                <Th>Clinet Id</Th>
+                <Th>Clinet Name</Th>
+                <Th>Service Used</Th>
+                <Th>Country</Th>
+                <Th>Script</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {tableData.map((item) => {
+                return (
+                  <Tr key={item.id}>
+                    <Td>{item.id}</Td>
+                    <Td>{item.name}</Td>
+                    <Td>
+                      <AvatarGroup size="md" max={2}>
+                        {item.services.map((service, index) => (
+                          <Avatar
+                            bg="#004696"
+                            color="#fff"
+                            key={index}
+                            name={service}
+                          />
+                        ))}
+                      </AvatarGroup>
+                    </Td>
+                    <Td>{item.createdAt}</Td>
+                    <Td>{item.createdAt}</Td>
+                    <Td>
+                      <Flex cursor="pointer" color="blue.700" fontSize="2rem">
+                        <Icon as={MdSettings} onClick={onOpen} />
+                        <Icon as={MdLock} />
+                      </Flex>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </>
   );
 };
 
