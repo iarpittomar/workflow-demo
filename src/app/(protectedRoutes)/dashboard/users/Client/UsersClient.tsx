@@ -13,74 +13,74 @@ import {
 const UsersClient = () => {
   const tableData = [
     {
-      id: 1,
-      clientId: "2030",
-      name: "Merkur - Case 1",
-      link: "https://drive.google.com/file/d/15wOdDJtm_96bL_tv0ly0CeYC5djhaSjP/view?usp=drive_link",
-      createdAt: "2023-05-28",
+      name: "Elsie",
+      email: "elsie@gmail.com",
+      role: "admin",
+      mobile: "7834569248",
+      gender: "Female",
     },
     {
-      id: 2,
-      clientId: "2031",
-      name: "Merkur - Case 2",
-      link: "https://drive.google.com/file/d/1yMZoAEBz8mgabQgRrAZeK2RZglmx4yFJ/view?usp=sharing",
-      createdAt: "2023-05-28",
+      name: "Jay",
+      email: "jay@mgt.eu",
+      role: "editor",
+      mobile: "9875676547",
+      gender: "Male",
     },
     {
-      id: 3,
-      clientId: "2032",
-      name: "Merkur - Case 3",
-      link: "https://drive.google.com/file/d/1GR9LnjvGO9iz5sZiK0sQgfvkm8BZ4UfD/view?usp=sharing",
-      createdAt: "2023-05-28",
+      name: "Niamh",
+      email: "niamh@gmail.com",
+      role: "user",
+      mobile: "7823457823",
+      gender: "Male",
     },
     {
-      id: 4,
-      clientId: "2030",
-      name: "Merkur - Case 4",
-      link: "https://drive.google.com/file/d/1se5TCBWGJwLmWAnGK0vbZKWaVoKDvcIA/view?usp=sharing",
-      createdAt: "2023-05-28",
+      name: "Cora",
+      email: "cora@gmail.com",
+      role: "guest",
+      mobile: "7823457823",
+      gender: "Female",
     },
     {
-      id: 5,
-      clientId: "2003",
-      name: "Tiptoro",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Kimberley",
+      email: "kimberley@gmail.com",
+      role: "guest",
+      mobile: "7823457823",
+      gender: "Male",
     },
     {
-      id: 6,
-      clientId: "2004",
-      name: "Betago",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Esther",
+      email: "esther@mgt.eu",
+      role: "user",
+      mobile: "7823457823",
+      gender: "Female",
     },
     {
-      id: 7,
-      clientId: "2005",
-      name: "Lowenplay",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Gemma",
+      email: "gemma@gmail.com",
+      role: "user",
+      mobile: "7823457823",
+      gender: "Female",
     },
     {
-      id: 8,
-      clientId: "2008",
-      name: "Sportwetten",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Demi",
+      email: "demi@gmail.com",
+      role: "user",
+      mobile: "7823457823",
+      gender: "Male",
     },
     {
-      id: 9,
-      clientId: "2011",
-      name: "Gluecksfall",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Iqra",
+      email: "iqra@mgt.eu",
+      role: "admin",
+      mobile: "7823457823",
+      gender: "Female",
     },
     {
-      id: 10,
-      clientId: "2014",
-      name: "red Rhino",
-      link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
-      createdAt: "2023-05-28",
+      name: "Dorothy",
+      email: "dorothy@gmail.com",
+      role: "user",
+      mobile: "7823457823",
+      gender: "Male",
     },
   ];
 
@@ -98,13 +98,14 @@ const UsersClient = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {tableData.map((item) => {
+            {tableData.map((item, index) => {
               return (
-                <Tr key={item.id}>
-                  <Td>{item.id}</Td>
+                <Tr key={index}>
                   <Td>{item.name}</Td>
-                  <Td>{item.createdAt}</Td>
-                  <Td>{item.createdAt}</Td>
+                  <Td>{item.email}</Td>
+                  <Td>{item.mobile}</Td>
+                  <Td>{item.gender}</Td>
+                  <Td>{item.role}</Td>
                 </Tr>
               );
             })}

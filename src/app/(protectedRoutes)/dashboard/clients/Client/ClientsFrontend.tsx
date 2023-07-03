@@ -8,7 +8,13 @@ import {
   Th,
   Tbody,
   Td,
+  Avatar,
+  AvatarGroup,
+  Icon,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
+import { MdSettings, MdLock } from "react-icons/md";
 
 const ClientsFrontend = () => {
   const tableData = [
@@ -16,8 +22,10 @@ const ClientsFrontend = () => {
       id: 1,
       clientId: "2030",
       name: "Merkur - Case 1",
-      link: "https://drive.google.com/file/d/15wOdDJtm_96bL_tv0ly0CeYC5djhaSjP/view?usp=drive_link",
+      link: "https://drVerify Eye.google.com/file/d/15wOdDJtm_96bL_tv0ly0CeYC5djhaSjP/view?usp=drive_link",
       createdAt: "2023-05-28",
+      services: ["Auto Ident", "N E", "Fin Tech"],
+      country: "Italy",
     },
     {
       id: 2,
@@ -25,6 +33,8 @@ const ClientsFrontend = () => {
       name: "Merkur - Case 2",
       link: "https://drive.google.com/file/d/1yMZoAEBz8mgabQgRrAZeK2RZglmx4yFJ/view?usp=sharing",
       createdAt: "2023-05-28",
+      services: ["Auto Ident", "N E", "Fin Tech"],
+      country: "Germany",
     },
     {
       id: 3,
@@ -32,6 +42,8 @@ const ClientsFrontend = () => {
       name: "Merkur - Case 3",
       link: "https://drive.google.com/file/d/1GR9LnjvGO9iz5sZiK0sQgfvkm8BZ4UfD/view?usp=sharing",
       createdAt: "2023-05-28",
+      services: ["Auto Ident", "N E", "Fin Tech"],
+      country: "Germany",
     },
     {
       id: 4,
@@ -39,6 +51,8 @@ const ClientsFrontend = () => {
       name: "Merkur - Case 4",
       link: "https://drive.google.com/file/d/1se5TCBWGJwLmWAnGK0vbZKWaVoKDvcIA/view?usp=sharing",
       createdAt: "2023-05-28",
+      services: ["Auto Ident", "N E", "Fin Tech"],
+      country: "Austria",
     },
     {
       id: 5,
@@ -46,6 +60,8 @@ const ClientsFrontend = () => {
       name: "Tiptoro",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Verify Eye", "Hoo Yu", "WebId Sign"],
+      country: "Italy",
     },
     {
       id: 6,
@@ -53,6 +69,8 @@ const ClientsFrontend = () => {
       name: "Betago",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Joo U", "N E", "In Ventia"],
+      country: "Germany",
     },
     {
       id: 7,
@@ -60,6 +78,8 @@ const ClientsFrontend = () => {
       name: "Lowenplay",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Verify Eye", "Hoo Yu", "Joo U"],
+      country: "Germany",
     },
     {
       id: 8,
@@ -67,6 +87,8 @@ const ClientsFrontend = () => {
       name: "Sportwetten",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Post Ident", "Web Id", "WebId Sign"],
+      country: "Austria",
     },
     {
       id: 9,
@@ -74,13 +96,17 @@ const ClientsFrontend = () => {
       name: "Gluecksfall",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Joo U", "In Ventia", "WebId Sign"],
+      country: "Austria",
     },
     {
       id: 10,
       clientId: "2014",
-      name: "Red Rhino",
+      name: "red Rhino",
       link: "https://gitlab.mgt.eu/mgt-client-config/configuration-ui",
       createdAt: "2023-05-28",
+      services: ["Web Id", "WebId Sign"],
+      country: "Austria",
     },
   ];
 
@@ -104,19 +130,30 @@ const ClientsFrontend = () => {
                 <Tr key={item.id}>
                   <Td>{item.id}</Td>
                   <Td>{item.name}</Td>
+                  <Td>
+                    <AvatarGroup size="md" max={2}>
+                      {item.services.map((service, index) => (
+                        <Avatar
+                          bg="#004696"
+                          color="#fff"
+                          key={index}
+                          name={service}
+                        />
+                      ))}
+                    </AvatarGroup>
+                  </Td>
                   <Td>{item.createdAt}</Td>
                   <Td>{item.createdAt}</Td>
+                  <Td>
+                    <Flex cursor="pointer" color="blue.700" fontSize="2rem">
+                      <Icon as={MdSettings} />
+                      <Icon as={MdLock} />
+                    </Flex>
+                  </Td>
                 </Tr>
               );
             })}
           </Tbody>
-          {/* <Tfoot>
-              <Tr>
-                <Th>To convert</Th>
-                <Th>into</Th>
-                <Th isNumeric>multiply by</Th>
-              </Tr>
-            </Tfoot> */}
         </Table>
       </TableContainer>
     </Card>

@@ -34,7 +34,7 @@ const LoginForm = () => {
         isClosable: true,
         position: "top-right",
       });
-      router.push("/dashboard");
+      router.push("/dashboard/clients");
     } else {
       toast({
         title: "Email or password does not exist.",

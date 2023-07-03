@@ -27,7 +27,7 @@ const Header = () => {
         <div className="flex items-center justify-between px-12 leading-body-3 font-semibold text-body-3 mx-auto h-[80px] min-h-[80px]">
           <nav className="h-full w-full flex items-center justify-between">
             <div className="flex items-center h-full">
-              <div onClick={onOpen}>
+              <div className="cursor-pointer" onClick={onOpen}>
                 <Image
                   src={logoIcon}
                   alt="Logo"
