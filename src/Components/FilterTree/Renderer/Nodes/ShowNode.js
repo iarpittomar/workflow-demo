@@ -37,20 +37,25 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
   return (
     <div className={className}>
       {node.isService && (
-        <button
-          className="btn btn-primary"
-          variant="contained"
-          onClick={handleAddService}
-          style={{ paddingBottom: '2px' }}
-          // sx={{ fontSize: "12px" }}
-        >
-          Add Service
-        </button>
-        // <Box container sx={{ paddingTop: "20px", paddingBottom:"10px" }}>
-        /* <Box item width="20%" sx={{ paddingLeft: "20px", paddingBottom:"10px" }}> */
-
-        // {/* </Box> */}
-        // </Box>
+        <div>
+          <button
+            className="btn btn-primary"
+            variant="contained"
+            onClick={handleAddService}
+            style={{ marginRight: '30px' }}
+            // sx={{ fontSize: "12px" }}
+          >
+            Add Service
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => nodeAction('new', node, path, 'logic')}
+            icon="add"
+            style={{ width: '100px' }}
+          >
+            Group
+          </button>
+        </div>
       )}
 
       {!node.isService && (

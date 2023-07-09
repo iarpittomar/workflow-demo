@@ -222,6 +222,13 @@ $box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.06);
     button.collapseButton:focus {
         box-shadow: 0 0 0 1.5px #bebebe;
     }
+
+    &.mode-edit,
+    &.mode-new {
+        .rowLabel{
+            background-color: #ffffff;
+        }
+    }
 }
 
 .type-condition,
