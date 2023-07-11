@@ -180,8 +180,8 @@ const FilterTree = () => {
           onMoveNode={(e) =>
             dispatchTreeData({ type: "SET", treeData: e.treeData })
           }
-          canDrag={({ node }) => !node.dragDisabled}
-          canDrop={(node) => node.nextParent?.type === "logic"}
+          // canDrag={({ node }) => !node.dragDisabled}
+          // canDrop={(node) => node.nextParent?.type === "logic"}
           generateNodeProps={() => ({
             handleFilterItemAction,
             isBusy,

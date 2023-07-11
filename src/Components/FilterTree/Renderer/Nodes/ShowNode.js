@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   shape,
   bool,
@@ -9,68 +9,75 @@ import {
   oneOfType,
   number,
   string,
-} from "prop-types";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
+} from 'prop-types';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-import "../styles.scss";
-import { Box } from "@chakra-ui/react";
+import '../styles.scss';
+import { Box } from '@chakra-ui/react';
 
 const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
   const handleAddService = () => {
-    return nodeAction("NEW", node, path, "service", false);
+    return nodeAction('NEW', node, path, 'service', false);
   };
   const nodeWidth =
-    node?.type === "logic"
+    node?.type === 'logic'
       ? 42
-      : node?.type === "condition"
+      : node?.type === 'condition'
       ? 350 - path.length * 42
-      : node?.type === "service"
+      : node?.type === 'service'
       ? 100
       : 0;
   const nodeTitle = node.title;
   const nodeSubtitle = node.subtitle;
   const className = `rowContents ${
-    !canDrag ? `rowContentsDragDisabled` : ""
-  } path- ${path.join("-")}`;
+    !canDrag ? `rowContentsDragDisabled` : ''
+  } path- ${path.join('-')}`;
 
   return (
     <div className={className}>
       {node.isService && (
-        <Box container sx={{ paddingTop: "20px" }}>
-          <Box item width="20%" sx={{ paddingLeft: "20px" }}>
-            <button
-              className="btn btn-primary"
-              variant="contained"
-              onClick={handleAddService}
-              sx={{ fontSize: "12px" }}
-            >
-              Add Service
-            </button>
-          </Box>
-        </Box>
+        <div>
+          <button
+            className="btn btn-primary"
+            variant="contained"
+            onClick={handleAddService}
+            style={{ marginRight: '30px' }}
+            // sx={{ fontSize: "12px" }}
+          >
+            Add Service
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => nodeAction('new', node, path, 'logic')}
+            icon="add"
+            style={{ width: '100px' }}
+          >
+            Group
+          </button>
+        </div>
       )}
 
       {!node.isService && (
         <>
           <div
             className="rowLabel"
-            onDoubleClick={() => nodeAction("edit", node, path)}
-            style={{ width: `${nodeWidth}px`, float: "left" }}
+            onDoubleClick={() => nodeAction('edit', node, path)}
+            style={{ width: `${nodeWidth}px`, float: 'left' }}
           >
             <span
               className={`rowTitle${
-                node.subtitle ? `rowTitleWithSubtitle` : ""
+                node.subtitle ? `rowTitleWithSubtitle` : ''
               }`}
             >
-              {typeof nodeTitle === "function"
+              {typeof nodeTitle === 'function'
                 ? nodeTitle({ subnode: node, path, treeIndex })
                 : nodeTitle}
             </span>
 
             {nodeSubtitle && (
               <span className="rowSubtitle">
-                {typeof nodeSubtitle === "function"
+                {typeof nodeSubtitle === 'function'
                   ? nodeSubtitle({ subnode: node, path, treeIndex })
                   : nodeSubtitle}
               </span>
@@ -79,23 +86,23 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
 
           <div
             className="rowToolbar"
-            style={{ float: "left", paddingTop: "10px" }}
+            style={{ float: 'left', paddingTop: '10px' }}
           >
             <>
               <div className="toolbarButton">
                 <button
                   className="btn btn-primary"
-                  onClick={() => nodeAction("edit", node, path)}
+                  onClick={() => nodeAction('edit', node, path)}
                 >
-                  <ModeEditIcon style={{ color: "grey" }} />
+                  <ModeEditIcon style={{ color: 'grey' }} />
                 </button>
               </div>
-              {(node.type === "service" || node.type === "logic") && (
+              {(node.type === 'service' || node.type === 'logic') && (
                 <>
                   <div className="toolbarButton">
                     <button
                       className="btn btn-primary"
-                      onClick={() => nodeAction("new", node, path, "condition")}
+                      onClick={() => nodeAction('new', node, path, 'condition')}
                       icon="add"
                     >
                       Pre Condition
@@ -104,7 +111,7 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
                   <div className="toolbarButton">
                     <button
                       className="btn btn-primary"
-                      onClick={() => nodeAction("new", node, path, "logic")}
+                      onClick={() => nodeAction('new', node, path, 'logic')}
                       icon="add"
                     >
                       Group
@@ -116,14 +123,14 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
               <div className="toolbarButton">
                 <button
                   className="btn btn-primary delete"
-                  onClick={() => nodeAction("delete", node, path)}
+                  onClick={() => nodeAction('delete', node, path)}
                   disabled={
-                    node.type === "logic" &&
+                    node.type === 'logic' &&
                     path.length === 1 &&
                     (!node.children || node.children.length === 0)
                   }
                 >
-                  <DeleteIcon style={{ color: "grey" }} />
+                  <DeleteIcon style={{ color: 'grey' }} />
                 </button>
               </div>
             </>
