@@ -1,5 +1,7 @@
 'use client';
 
+import PropTypes from "prop-types";
+
 import React, { useState, useReducer, useCallback } from 'react';
 
 import CustomTheme from './Renderer';
@@ -12,9 +14,10 @@ import SortableTree, {
 } from 'react-sortable-tree';
 import { Box } from '@chakra-ui/react';
 import { getItem } from '@/utils';
+import { number } from 'zod';
 
 const FilterTree = (props) => {
-  let { setWorkflowData, clientId } = props;
+  let { clientId } = props;
   let savedTreeData = getItem(`workflow_${clientId}`);
   if (
     !savedTreeData ||
@@ -172,7 +175,7 @@ const FilterTree = (props) => {
     },
     [dispatchTreeData, setIsBusy]
   );
-  setWorkflowData(treeData);
+  props.setWorkflowData(treeData);
   return (
     <div>
       <Box sx={{ marginTop: '10px', paddingLeft: '100px' }}>
@@ -201,6 +204,11 @@ const FilterTree = (props) => {
       </Box>
     </div>
   );
+};
+
+FilterTree.propTypes = {
+  clientId: PropTypes.number,
+  setWorkflowData: PropTypes.func,
 };
 
 export default FilterTree;

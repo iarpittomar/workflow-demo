@@ -18,11 +18,18 @@ interface IFilterModal {
   isOpen: boolean;
   onClose: VoidFunction;
   exportJson: VoidFunction;
+  clientId: number;
+}
+interface IFilterModal {
+  isOpen: boolean;
+  onClose: VoidFunction;
+  exportJson: VoidFunction;
+  clientId: number;
 }
 
 const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
   const toast = useToast();
-  const [workflowData, setWorkflowData] = useState([]);
+  const [workflowData, setWorkflowData] = useState();
   const exportJson = () => {
     const data = getItem(`workflow_${clientId}`);
     if (
