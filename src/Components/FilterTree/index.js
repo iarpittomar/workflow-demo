@@ -1,66 +1,76 @@
-"use client";
+'use client';
 
-import React, { useState, useReducer, useCallback } from "react";
+import React, { useState, useReducer, useCallback } from 'react';
 
-import CustomTheme from "./Renderer";
+import CustomTheme from './Renderer';
 
 import SortableTree, {
   addNodeUnderParent,
   removeNodeAtPath,
   changeNodeAtPath,
   toggleExpandedForAll,
-} from "react-sortable-tree";
-import { Box } from "@chakra-ui/react";
+} from 'react-sortable-tree';
+import { Box } from '@chakra-ui/react';
+import { getItem } from '@/utils';
 
-const FilterTree = () => {
-  const initTree = [
-    {
-      title: "",
-      type: "service",
-      dragDisabled: true,
-      expanded: true,
-      isService: true,
-    },
-  ];
+const FilterTree = (props) => {
+  let { setWorkflowData, clientId } = props;
+  let savedTreeData = getItem(`workflow_${clientId}`);
+  if (
+    !savedTreeData ||
+    !Array.isArray(savedTreeData) ||
+    !savedTreeData.length
+  ) {
+    savedTreeData = [
+      {
+        title: '',
+        type: 'service',
+        dragDisabled: true,
+        expanded: true,
+        isService: true,
+      },
+    ];
+  }
+  const initTree = savedTreeData;
   const treeDataReducer = (treeData, action) => {
     const { node, path, getNodeKey, newType, isService, title } = action;
     switch (action.type.toUpperCase()) {
-      case "SET":
+      case 'SET':
         return action.treeData;
 
-      case "NEW":
+      case 'NEW':
         const newNode =
-          newType === "condition"
+          newType === 'condition'
             ? {
-                title: "",
-                field: "",
-                label: "",
-                operator: "",
-                value: "",
-                type: "condition",
+                title: '',
+                field: '',
+                label: '',
+                operator: '',
+                value: '',
+                type: 'condition',
                 dragDisabled: false,
-                mode: "new",
+                mode: 'new',
                 isService: isService,
               }
-            : newType === "logic"
+            : newType === 'logic'
             ? {
-                title: "",
-                type: "logic",
+                title: '',
+                type: 'logic',
                 dragDisabled: false,
                 children: [],
-                mode: "new",
+                mode: 'new',
                 isService: isService,
               }
             : {
                 title: title,
-                type: "service",
+                type: 'service',
                 dragDisabled: false,
                 children: [],
-                mode: "new",
+                mode: 'new',
                 isService: isService,
               };
         const index =
-          node.type === "condition" ? 2 : node.type === "logic" ? 1 : 1;
+          node.type === 'condition' ? 1 : node.type === 'logic' ? 1 : 1;
         return addNodeUnderParent({
           treeData,
           parentKey: path[path.length - index],
@@ -69,37 +79,37 @@ const FilterTree = () => {
           newNode,
         }).treeData;
 
-      case "EDIT":
+      case 'EDIT':
         return changeNodeAtPath({
           treeData,
           path,
           getNodeKey,
-          newNode: { ...node, mode: "edit", clone: { ...node } },
+          newNode: { ...node, mode: 'edit', clone: { ...node } },
         });
 
-      case "SAVE":
+      case 'SAVE':
         switch (node.type) {
-          case "service":
+          case 'service':
             node.title = title;
             break;
-          case "condition":
-            node.title = `${node.field} ${node.operator} ${node.value}`;
+          case 'condition':
+            node.title = `${node.field} ${node.fieldCheck} ${node.operator} ${node.value}`;
             break;
-          case "logic":
-            node.title = node.logic || "";
+          case 'logic':
+            node.title = node.logic || '';
             break;
           default:
-            node.title = "";
+            node.title = '';
             break;
         }
         return changeNodeAtPath({
           treeData,
           path,
           getNodeKey,
-          newNode: { ...node, mode: "show" },
+          newNode: { ...node, mode: 'show' },
         });
 
-      case "DELETE":
+      case 'DELETE':
         const deletedTree = removeNodeAtPath({
           treeData,
           path: action.path,
@@ -108,26 +118,26 @@ const FilterTree = () => {
         if (!deletedTree.length) {
           return [
             {
-              title: "AND",
-              field: "",
-              label: "",
-              operator: "",
-              value: "AND",
-              logic: "AND",
-              type: "logic",
+              title: 'AND',
+              field: '',
+              label: '',
+              operator: '',
+              value: 'AND',
+              logic: 'AND',
+              type: 'logic',
               dragDisabled: false,
             },
           ];
         }
         return deletedTree;
 
-      case "CANCEL":
-        if (node.mode === "edit") {
+      case 'CANCEL':
+        if (node.mode === 'edit') {
           return changeNodeAtPath({
             treeData,
             path,
             getNodeKey,
-            newNode: { ...node.clone, mode: "show" },
+            newNode: { ...node.clone, mode: 'show' },
           });
         }
         return removeNodeAtPath({ treeData, path, getNodeKey });
@@ -136,7 +146,7 @@ const FilterTree = () => {
         return [...treeData]; // Should not get there.
     }
   };
-  const initIsBusy = initTree.length && initTree[0].mode === "new";
+  const initIsBusy = initTree.length && initTree[0].mode === 'new';
 
   const [treeData, dispatchTreeData] = useReducer(treeDataReducer, initTree);
   const [isBusy, setIsBusy] = useState(initIsBusy);
@@ -154,7 +164,7 @@ const FilterTree = () => {
         isService,
         title,
       });
-      if (action === "new" || action === "edit") {
+      if (action === 'new' || action === 'edit') {
         setIsBusy(true);
       } else {
         setIsBusy(false);
@@ -162,9 +172,10 @@ const FilterTree = () => {
     },
     [dispatchTreeData, setIsBusy]
   );
+  setWorkflowData(treeData);
   return (
     <div>
-      <Box sx={{ marginTop: "10px", paddingLeft: "100px" }}>
+      <Box sx={{ marginTop: '10px', paddingLeft: '100px' }}>
         <SortableTree
           className="filter-tree"
           isVirtualized={false}
@@ -174,11 +185,11 @@ const FilterTree = () => {
           // style={{ paddingTop: '10px' }}
           treeData={treeData}
           onChange={(changedTreeData) =>
-            dispatchTreeData({ type: "SET", treeData: changedTreeData })
+            dispatchTreeData({ type: 'SET', treeData: changedTreeData })
           }
           shouldCopyOnOutsideDrop
           onMoveNode={(e) =>
-            dispatchTreeData({ type: "SET", treeData: e.treeData })
+            dispatchTreeData({ type: 'SET', treeData: e.treeData })
           }
           // canDrag={({ node }) => !node.dragDisabled}
           // canDrop={(node) => node.nextParent?.type === "logic"}

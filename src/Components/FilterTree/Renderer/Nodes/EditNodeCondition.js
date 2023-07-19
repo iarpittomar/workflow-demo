@@ -10,12 +10,15 @@ import CloseIcon from "@mui/icons-material/Close";
 const operators = [
   { label: "Not Started", key: "operator", value: "Not Started" },
   { label: "Started", key: "operator", value: "Started" },
+  { label: "Down", key: "operator", value: "Down" },
   { label: "Succeeded", key: "operator", value: "Succeeded" },
   { label: "Failed", key: "operator", value: "Failed" },
-  { label: "Succeeded", key: "operator", value: "Succeeded" },
-  { label: "Down", key: "operator", value: "Down" },
 ];
 const fields = [
+  { label: "SCHUFA", value: "SCHUFA", key: "SCHUFA" },
+  { label: "PEP, Sanction OASIS", value: "PEP, Sanction OASIS", key: "PEP_and_Sanction" },
+  { label: "1-Cent", value: "1-Cent", key: "OneCent" },
+  { label: "YES", value: "YES", key: "Yes" },
   { label: "Identt", value: "Identt", key: "Identt" },
   { label: "Hooyu", value: "Hooyu", key: "Hooyu" },
   { label: "Verifeye", value: "Verifeye", key: "Verifeye" },
@@ -30,16 +33,27 @@ const fields = [
   { label: "IdAustria", value: "IdAustria", key: "IdAustria" },
   { label: "Neos", value: "Neos", key: "Neos" },
   { label: "ItsMe", value: "ItsMe", key: "ItsMe" },
-  { label: "Yes", value: "Yes", key: "Yes" },
-  { label: "Schufa", value: "Schufa", key: "Schufa" },
 ];
+
+const fieldChecks = [
+  { label: "Address Check", key: "fieldCheck", value: "Address Check" },
+  { label: "Birthday Check", key: "fieldCheck", value: "Birthday Check" },
+  { label: "Bank account Check", key: "fieldCheck", value: "Bank account Check" },
+  { label: "Pin bank transfer Check", key: "fieldCheck", value: "Pin bank transfer Check" },
+  { label: "Pin input Check", key: "fieldCheck", value: "Pin input Check" },
+  { label: "Passport recognition", key: "fieldCheck", value: "Passport recognition" },
+  { label: "Passport Check", key: "fieldCheck", value: "Passport Check" },
+]
+
+
 const EditNodeCondition = ({ node, path, nodeAction }) => {
   const [field, setField] = useState("");
   const [operator, setOperator] = useState("");
   const [value, setValue] = useState("");
+  const [fieldCheck, setFieldCheck] = useState("");
 
   const onSubmit = () => {
-    const newNode = { ...node, field, value, operator };
+    const newNode = { ...node, field, value, operator, fieldCheck };
     nodeAction("save", newNode, path);
   };
 
@@ -54,6 +68,8 @@ const EditNodeCondition = ({ node, path, nodeAction }) => {
         break;
       case "value":
         setValue(event.target.value);
+      case "fieldCheck":
+        setFieldCheck(value);
         break;
       default:
         break;
@@ -63,12 +79,20 @@ const EditNodeCondition = ({ node, path, nodeAction }) => {
   return (
     <div className="rowContents">
       <div className="rowLabel mode-edit" style={{ width: "650px" }}>
-        <div style={{ width: "300px", marginRight: "6px" }}>
+        <div style={{ width: "200px", marginRight: "6px" }}>
           <DropDownList
             label="Select a service"
             value={field}
             items={fields}
             handleChange={(event) => handleChange(event, "field")}
+          />
+        </div>
+        <div style={{ width: "200px", marginRight: "6px" }}>
+          <DropDownList
+            label="Select a field check"
+            value={fieldCheck}
+            items={fieldChecks}
+            handleChange={(event) => handleChange(event, "fieldCheck")}
           />
         </div>
         <div style={{ width: "200px", marginRight: "6px" }}>

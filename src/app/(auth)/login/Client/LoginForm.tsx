@@ -30,7 +30,7 @@ const LoginForm = () => {
       toast({
         title: "Login successful",
         status: "success",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "top-right",
       });

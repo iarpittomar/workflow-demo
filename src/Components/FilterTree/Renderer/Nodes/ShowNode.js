@@ -22,11 +22,19 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
   };
   const nodeWidth =
     node?.type === 'logic'
-      ? 42
+      ? 20 * node.title.length // 42
       : node?.type === 'condition'
-      ? 350 - path.length * 42
+      ? 10 * node.title.length // 350 - path.length * 42
       : node?.type === 'service'
-      ? 100
+      ? 100 - node.title.length * 10 // 100
+      : 0;
+  const nodeMinWidth =
+    node?.type === 'logic'
+      ? 10 * node.title.length // 42
+      : node?.type === 'condition'
+      ? 10 * node.title.length // 350 - path.length * 42
+      : node?.type === 'service'
+      ? 90 // 100
       : 0;
   const nodeTitle = node.title;
   const nodeSubtitle = node.subtitle;
@@ -63,7 +71,7 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
           <div
             className="rowLabel"
             onDoubleClick={() => nodeAction('edit', node, path)}
-            style={{ width: `${nodeWidth}px`, float: 'left' }}
+            style={{ width: `${nodeWidth}px`, minWidth: `${nodeMinWidth}px` }}
           >
             <span
               className={`rowTitle${
@@ -84,10 +92,7 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
             )}
           </div>
 
-          <div
-            className="rowToolbar"
-            style={{ float: 'left', paddingTop: '10px' }}
-          >
+          <div className="rowToolbar" style={{ float: 'left' }}>
             <>
               <div className="toolbarButton">
                 <button
@@ -97,7 +102,9 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
                   <ModeEditIcon style={{ color: 'grey' }} />
                 </button>
               </div>
-              {(node.type === 'service' || node.type === 'logic') && (
+              {(node.type === 'service' ||
+                node.type === 'logic' ||
+                node.type === 'condition') && (
                 <>
                   <div className="toolbarButton">
                     <button

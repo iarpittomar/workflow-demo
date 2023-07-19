@@ -5,13 +5,31 @@ import logoIcon from "@/assets/mgtNewLogo.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure, Icon } from "@chakra-ui/react";
 import Sidebar from "../Sidebar/Sidebar";
+import { TbLogout } from 'react-icons/tb';
+import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   //   const userData = getCookie("user-data")
   //     ? JSON.parse(getCookie("user-data") as string)
   //     : null;
+
+  const router = useRouter();
+  const toast = useToast();
+
+  const onLogout = () => {
+    toast({
+        title: "Logging out",
+        status: "success",
+        duration: 500,
+        isClosable: true,
+        position: "top-right",
+      });
+      router.push("/login");
+  };
+
 
   const path = usePathname();
 
@@ -50,9 +68,21 @@ const Header = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="avatar online placeholder">
-                    <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                      <span className="text-xl">SM</span>
+                  <div className="flex">
+                    <div className="flex space-x-6">
+                      <div className="avatar online placeholder">
+                        <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+                          <span className="text-xl">SM</span>
+                        </div>
+                      </div>
+                      <div className="h-5 w-6 mt-1.5">
+                        <Icon
+                          boxSize={8}
+                          as={TbLogout}
+                          onClick={onLogout}
+                          color={"white"}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
