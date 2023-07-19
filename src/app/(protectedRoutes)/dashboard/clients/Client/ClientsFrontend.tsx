@@ -126,13 +126,18 @@ const ClientsFrontend = () => {
     },
   ];
 
-  const [clientIndex, setClientIndex] = useState('');
+  const [clientIndex, setClientIndex] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <FilterModal clientId={clientIndex} isOpen={isOpen} onClose={onClose} exportJson={() => {}} />
+      <FilterModal
+        clientId={clientIndex}
+        isOpen={isOpen}
+        onClose={onClose}
+        exportJson={() => {}}
+      />
       <Card className="mt-12">
         <TableContainer className="">
           <Table variant="striped">
@@ -156,6 +161,8 @@ const ClientsFrontend = () => {
                       <AvatarGroup size="md" max={3}>
                         {item.services.map((service, index) => (
                           <Avatar
+                            // @ts-ignore
+                            //Todo: Fix the lint
                             bg={`${serviceColors[service]}`}
                             color="#fff"
                             key={index}
