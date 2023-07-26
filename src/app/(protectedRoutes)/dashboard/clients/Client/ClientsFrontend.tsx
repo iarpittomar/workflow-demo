@@ -14,6 +14,7 @@ import {
   Box,
   Flex,
   useDisclosure,
+  Image,
 } from '@chakra-ui/react';
 import { MdSettings, MdLock } from 'react-icons/md';
 import FilterModal from './FilterModal';
@@ -37,38 +38,42 @@ const ClientsFrontend = () => {
     {
       id: 1,
       clientId: '2030',
-      name: 'Merkur - Case 1',
+      name: 'Merkur - Xtip',
       link: 'https://drVerify Eye.google.com/file/d/15wOdDJtm_96bL_tv0ly0CeYC5djhaSjP/view?usp=drive_link',
       createdAt: '2023-05-28',
       services: ['Auto Ident', 'N E', 'Fin Tech'],
       country: 'Italy',
+      logo: '/logos/Xtip.jpg'
     },
     {
       id: 2,
       clientId: '2031',
-      name: 'Merkur - Case 2',
+      name: 'Merkur - Cashpoint',
       link: 'https://drive.google.com/file/d/1yMZoAEBz8mgabQgRrAZeK2RZglmx4yFJ/view?usp=sharing',
       createdAt: '2023-05-28',
       services: ['Auto Ident', 'N E', 'Fin Tech'],
       country: 'Germany',
+      logo: '/logos/cashpoint.png'
     },
     {
       id: 3,
       clientId: '2032',
-      name: 'Merkur - Case 3',
+      name: 'Merkur - Casino',
       link: 'https://drive.google.com/file/d/1GR9LnjvGO9iz5sZiK0sQgfvkm8BZ4UfD/view?usp=sharing',
       createdAt: '2023-05-28',
       services: ['Auto Ident', 'N E', 'Fin Tech'],
       country: 'Germany',
+      logo: '/logos/merkur.webp'
     },
     {
       id: 4,
       clientId: '2030',
-      name: 'Merkur - Case 4',
+      name: 'Merkur - Spiel',
       link: 'https://drive.google.com/file/d/1se5TCBWGJwLmWAnGK0vbZKWaVoKDvcIA/view?usp=sharing',
       createdAt: '2023-05-28',
       services: ['Auto Ident', 'N E', 'Fin Tech'],
       country: 'Austria',
+      logo: '/logos/spiel.webp'
     },
     {
       id: 5,
@@ -78,15 +83,17 @@ const ClientsFrontend = () => {
       createdAt: '2023-05-28',
       services: ['Verify Eye', 'Hoo Yu', 'WebId Sign'],
       country: 'Italy',
+      logo: '/logos/tiptorro.jpg'
     },
     {
       id: 6,
       clientId: '2004',
-      name: 'Betago',
+      name: 'Betway',
       link: 'https://gitlab.mgt.eu/mgt-client-config/configuration-ui',
       createdAt: '2023-05-28',
       services: ['Joo U', 'N E', 'In Ventia'],
       country: 'Germany',
+      logo: '/logos/betway.png'
     },
     {
       id: 7,
@@ -96,6 +103,7 @@ const ClientsFrontend = () => {
       createdAt: '2023-05-28',
       services: ['Verify Eye', 'Hoo Yu', 'Joo U'],
       country: 'Germany',
+      logo: '/logos/lowenplay.jpg'
     },
     {
       id: 8,
@@ -105,6 +113,7 @@ const ClientsFrontend = () => {
       createdAt: '2023-05-28',
       services: ['Post Ident', 'Web Id', 'WebId Sign'],
       country: 'Austria',
+      logo: '/logos/sportwetten.png'
     },
     {
       id: 9,
@@ -114,6 +123,7 @@ const ClientsFrontend = () => {
       createdAt: '2023-05-28',
       services: ['Joo U', 'In Ventia', 'WebId Sign'],
       country: 'Austria',
+      logo: '/logos/Gluecksfall.png'
     },
     {
       id: 10,
@@ -123,6 +133,7 @@ const ClientsFrontend = () => {
       createdAt: '2023-05-28',
       services: ['Web Id', 'WebId Sign'],
       country: 'Austria',
+      logo: '/logos/redrhino.png'
     },
   ];
 
@@ -138,12 +149,13 @@ const ClientsFrontend = () => {
         onClose={onClose}
         exportJson={() => {}}
       />
-      <Card className="mt-12">
-        <TableContainer className="">
+      <Card className="mt-10">
+        <TableContainer>
           <Table variant="striped">
             <Thead>
               <Tr>
                 <Th>Clinet Id</Th>
+                <Th></Th>
                 <Th>Clinet Name</Th>
                 <Th>Service Used</Th>
                 <Th>Country</Th>
@@ -156,6 +168,14 @@ const ClientsFrontend = () => {
                 return (
                   <Tr key={item.id}>
                     <Td>{item.id}</Td>
+                    <Td>
+                      <Image
+                        boxSize="50px"
+                        objectFit="inherit"
+                        src={item.logo}
+                        alt="Logo not available"
+                      />
+                    </Td>
                     <Td>{item.name}</Td>
                     <Td>
                       <AvatarGroup size="md" max={3}>
