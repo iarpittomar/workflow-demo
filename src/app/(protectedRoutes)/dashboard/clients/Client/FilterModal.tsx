@@ -15,7 +15,7 @@ import {
 
 import FilterTree from '@/Components/FilterTree';
 import ConfirmModal from './DialogBox/ConfirmModal';
-import React, { useState } from 'react';
+import React, { useState, useRef, ChangeEvent, useEffect } from 'react';
 import { setItem, getItem } from '@/utils';
 interface IFilterModal {
   isOpen: boolean;
@@ -33,6 +33,9 @@ interface IFilterModal {
 const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
   const toast = useToast();
   const [workflowData, setWorkflowData] = useState();
+  const inputFile = useRef(null);
+  // const [fileData, setFile] = useState();
+
   const {
     isOpen: isConfirmOpen,
     onOpen: isConfirmOnOpen,
@@ -67,7 +70,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
     link.click();
   };
 
-  const saveData = () => {
+  const saveData = (data = []) => {
     toast({
       title: 'Thank you!',
       description:
@@ -77,7 +80,25 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
       isClosable: true,
       position: 'top-right',
     });
-    setItem(workflowData, `workflow_${clientId}`);
+    let loadData = data.length ? data : workflowData;
+    setItem(loadData, `workflow_${clientId}`);
+    onClose();
+  };
+
+  const onImport = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const fileReader = new FileReader();
+      fileReader.readAsText(e.target.files[0], 'UTF-8');
+      fileReader.onload = (e) => {
+        saveData(JSON.parse(e.target.result));
+      };
+    }
+  };
+
+  const onImportClick = (e: ChangeEvent<HTMLInputElement>) => {
+    if (inputFile?.current) {
+      inputFile.current.click();
+    }
   };
 
   return (
@@ -99,6 +120,19 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
           <ModalHeader>
             <div>Workflow</div>
             <div className="float-left">
+              <button
+                className="btn btn-warning mr-4 w-20"
+                onClick={onImportClick}
+              >
+                Import
+                <input
+                  type="file"
+                  id="file"
+                  style={{ display: 'none' }}
+                  ref={inputFile}
+                  onChange={onImport}
+                />
+              </button>
               <button className="btn btn-error mr-4 w-20" onClick={exportJson}>
                 Download
               </button>
@@ -113,7 +147,11 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
 
           {/* <ModalCloseButton onClick={onModalClose} /> */}
           <ModalBody minH="60vh">
-            <FilterTree setWorkflowData={setWorkflowData} clientId={clientId} />
+            <FilterTree
+              setWorkflowData={setWorkflowData}
+              clientId={clientId}
+              // importedData={fileData}
+            />
           </ModalBody>
           {/* <ModalFooter></ModalFooter> */}
         </ModalContent>
