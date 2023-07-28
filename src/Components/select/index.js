@@ -31,7 +31,7 @@ const BasicSelect = (props) => {
   } = props;
   const [selectedValue, setValue] = React.useState('');
 
-  let value = '';
+  let value = props?.value || '';
 
   const handleChange = (event) => {
     value = selectedValue;
@@ -44,6 +44,7 @@ const BasicSelect = (props) => {
       placeholder={label}
       isSearchable={isSearchable}
       // className="select"
+      value={value? {label: value}: ''}
       ref={props.refValue}
       // styles={{ ...style, ...customStyle }}
     />

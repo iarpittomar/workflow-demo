@@ -47,10 +47,10 @@ const fieldChecks = [
 
 
 const EditNodeCondition = ({ node, path, nodeAction }) => {
-  const [field, setField] = useState("");
-  const [operator, setOperator] = useState("");
-  const [value, setValue] = useState("");
-  const [fieldCheck, setFieldCheck] = useState("");
+  const [field, setField] = useState(node?.field||"");
+  const [operator, setOperator] = useState(node?.operator||"");
+  const [value, setValue] = useState(node?.value||"");
+  const [fieldCheck, setFieldCheck] = useState(node?.fieldCheck || "");
 
   const onSubmit = () => {
     const newNode = { ...node, field, value, operator, fieldCheck };
