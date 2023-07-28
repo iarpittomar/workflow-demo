@@ -70,7 +70,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
     link.click();
   };
 
-  const saveData = (data = []) => {
+  const saveData = (data:any = []) => {
     toast({
       title: 'Thank you!',
       description:
@@ -90,13 +90,15 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
       const fileReader = new FileReader();
       fileReader.readAsText(e.target.files[0], 'UTF-8');
       fileReader.onload = (e) => {
+        //@ts-ignore
         saveData(JSON.parse(e.target.result));
       };
     }
   };
 
-  const onImportClick = (e: ChangeEvent<HTMLInputElement>) => {
+  const onImportClick = () => {
     if (inputFile?.current) {
+      //@ts-ignore
       inputFile.current.click();
     }
   };
@@ -119,7 +121,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
         <ModalContent>
           <ModalHeader>
             <div>Workflow</div>
-            <div className="float-left">
+            <div className="flex float-right">
               <button
                 className="btn btn-warning mr-4 w-20"
                 onClick={onImportClick}
