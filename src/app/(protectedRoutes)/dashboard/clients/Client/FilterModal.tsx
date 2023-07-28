@@ -72,9 +72,8 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
 
   const saveData = (data: any = []) => {
     toast({
-      title: 'Thank you!',
-      description:
-        'We have taken your request and will provide you the services soon.',
+      title: 'Saved!',
+      description: 'Workflow saved successfully!!',
       status: 'success',
       duration: 1000,
       isClosable: true,
@@ -82,7 +81,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
     });
     let loadData = data.length ? data : workflowData;
     setItem(loadData, `workflow_${clientId}`);
-    onClose();
+    // onClose();
   };
 
   const onImport = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +91,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
       fileReader.onload = (e) => {
         //@ts-ignore
         saveData(JSON.parse(e.target.result));
+        onClose();
       };
     }
   };
