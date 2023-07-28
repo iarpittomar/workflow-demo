@@ -70,7 +70,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
     link.click();
   };
 
-  const saveData = (data:any = []) => {
+  const saveData = (data: any = []) => {
     toast({
       title: 'Thank you!',
       description:
@@ -123,7 +123,7 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
             <div>Workflow</div>
             <div className="flex float-right">
               <button
-                className="btn btn-warning mr-4 w-20"
+                className="btn btn-warning text-white-800 mr-4 w-20"
                 onClick={onImportClick}
               >
                 Import
@@ -135,13 +135,22 @@ const FilterModal = ({ isOpen, onClose, clientId }: IFilterModal) => {
                   onChange={onImport}
                 />
               </button>
-              <button className="btn btn-error mr-4 w-20" onClick={exportJson}>
+              <button
+                className="btn btn-error mr-4 w-20 text-white-800"
+                onClick={exportJson}
+              >
                 Download
               </button>
-              <button className="btn btn-success mr-4 w-20" onClick={saveData}>
+              <button
+                className="btn btn-success mr-4 w-20 text-white-800"
+                onClick={saveData}
+              >
                 Save
               </button>
-              <button className="btn btn-accent w-20" onClick={isConfirmOnOpen}>
+              <button
+                className="btn btn-accent w-20 text-white-800"
+                onClick={isConfirmOnOpen}
+              >
                 Cancel
               </button>
             </div>
