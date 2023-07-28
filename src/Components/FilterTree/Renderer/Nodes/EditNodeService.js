@@ -29,7 +29,7 @@ const sourceData = [
 ];
 const EditServiceCondition = ({ node, path, nodeAction }) => {
   const [nodeData, setNodeData] = useState(node);
-  const [serviceValue, SetServiceValue] = useState("");
+  const [serviceValue, SetServiceValue] = useState(node?.serviceValue || '');
 
   const handleChange = (event) => {
     let value = event?.value;
@@ -37,7 +37,7 @@ const EditServiceCondition = ({ node, path, nodeAction }) => {
   };
 
   const onSubmit = () => {
-    const newNode = { ...nodeData };
+    const newNode = { ...nodeData, serviceValue };
     nodeAction("save", newNode, path, "service", false, serviceValue);
   };
 

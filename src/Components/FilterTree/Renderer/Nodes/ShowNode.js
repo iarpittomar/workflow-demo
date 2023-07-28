@@ -112,10 +112,10 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
                       onClick={() => nodeAction('new', node, path, 'condition')}
                       icon="add"
                     >
-                      Pre Condition
+                      Condition
                     </button>
                   </div>
-                  <div className="toolbarButton">
+                  {/* <div className="toolbarButton">
                     <button
                       className="btn btn-primary"
                       onClick={() => nodeAction('new', node, path, 'logic')}
@@ -123,7 +123,7 @@ const ShowNode = ({ node, path, treeIndex, canDrag, nodeAction }) => {
                     >
                       Group
                     </button>
-                  </div>
+                  </div> */}
                 </>
               )}
 

@@ -207,11 +207,13 @@ function FilterTree({ clientId, setWorkflowData }) {
 FilterTree.propTypes = {
   clientId: PropTypes.number,
   setWorkflowData: PropTypes.func,
+  importedData: PropTypes.array,
 };
 
 FilterTree.defaultProps = {
   clientId: 0,
   setWorkflowData: () => {},
+  importedData: []
 };
 
 export default FilterTree;
